@@ -1,0 +1,1 @@
+Welcome to the source code for the Notion graphics that Jonathan Dain has produced. These are welcome to be utilized and distributed just please cite the source. 
