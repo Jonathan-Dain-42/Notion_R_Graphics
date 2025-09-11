@@ -1,0 +1,42 @@
+on: 
+  schedule:
+    # Runs at 00:00 UTC (midnight) every day.
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  generate-plots:
+    runs-on: ubuntu-latest
+    steps:
+    # Step 1: Install R
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+    # Step 2: Import the repository to the remot computer
+      - name: Check out repository
+        uses: actions/checkout@v3
+    # Step 3: Install packages  
+      - name: Install packages
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::tidyverse
+            any::shadowtext
+    # Step 4: Generate our plots:
+      - name: Life-plot
+        run: Rscript -e 'source("Life_progress.R")'
+      - name: Up to you plot
+        run: Rscript -e 'source("Up_to_you.R")'
+    # Step 5: Commit the updated plots back to the repository
+      # This uses a dedicated action to handle committing files.
+      # It automatically handles the case where there are no changes.
+      - name: Commit and push plots
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "BOT: Auto-update plots"
+          # Tell the action to commit files in the 'Figures' directory.
+          file_pattern: Figures/*.png
+          # Optional: Specify a branch to push to. Defaults to the current branch.
+          # branch: main
+          # Optional: Add a custom user name and email
+          commit_user_name: "GitHub Actions Bot"
+          commit_user_email: "actions@github.com"
