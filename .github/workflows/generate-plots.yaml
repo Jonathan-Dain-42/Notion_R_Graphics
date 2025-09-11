@@ -23,9 +23,9 @@ jobs:
             any::shadowtext
     # Step 4: Generate our plots:
       - name: Life-plot
-        run: Rscript -e 'source("Life_progress.R")'
+        run: Rscript -e 'source("Scripts/Life_progress.R")'
       - name: Up to you plot
-        run: Rscript -e 'source("Up_to_you.R")'
+        run: Rscript -e 'source("Scripts/Up_to_you.R")'
     # Step 5: Commit the updated plots back to the repository
       # This uses a dedicated action to handle committing files.
       # It automatically handles the case where there are no changes.
