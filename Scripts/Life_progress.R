@@ -88,7 +88,7 @@ get_week_progress(current_date = as.Date("2025-08-16"))
 # PhD Progress:
 get_precent_done <- function(current_date) {
   start_date <- as.Date("2022-09-01")
-  grad_date <- as.Date("2027-05-01")
+  grad_date <- as.Date("2027-12-01")
   total_time <- grad_date - start_date
   days_since <- current_date-start_date
   percent_done <- as.numeric(days_since)/as.numeric(total_time)*100
